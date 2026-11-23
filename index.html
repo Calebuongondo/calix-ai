@@ -55,7 +55,7 @@ const KEY='calix_vocab_v1';
 const getWords=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return []}};
 const putWords=w=>localStorage.setItem(KEY,JSON.stringify(w));
 const msgs=document.getElementById('messages'), input=document.getElementById('chatInput');
-function add(text,who='bot'){const b=document.createElement('div');b.className='bubble '+who;b.textContent=text;msgs.appendChild(b);b.scrollIntoView({behavior:'smooth',block:'end')}
+function add(text,who='bot'){const b=document.createElement('div');b.className='bubble '+who;b.textContent=text;msgs.appendChild(b);b.scrollIntoView({behavior:'smooth',block:'end'})}
 function answer(q){const words=getWords(),query=q.toLowerCase().trim();const matches=words.filter(w=>query.includes(w.word.toLowerCase())||w.word.toLowerCase().includes(query));if(matches.length){return matches.map(w=>'Ekegusii: '+w.word+'\nMeaning: '+w.meaning+(w.example?'\nExample: '+w.example:'')).join('\n\n')}
 if(/teach|learn|word|ekegusii/i.test(q))return 'I can learn new words in this early build. Tap “Teach Calix a word” and enter the word, meaning, and optional example. Words are saved on this device.';
 return 'I’m still being connected to a live AI model. I can look up Ekegusii words that have been saved on this device. Try teaching me a word using “Teach Calix a word”.';}
