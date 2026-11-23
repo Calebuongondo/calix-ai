@@ -1,71 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101827">
-  <title>Calix AI</title>
-  <style>
-    *{box-sizing:border-box}body{margin:0;background:#0b1220;color:#edf3ff;font:16px system-ui,-apple-system,Segoe UI,sans-serif}
-    .app{min-height:100dvh;display:flex;flex-direction:column;max-width:860px;margin:auto}
-    header{padding:18px 18px 14px;border-bottom:1px solid #263349;display:flex;align-items:center;gap:12px}
-    .logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#43d9ff,#5c75ff);display:grid;place-items:center;color:#061321;font-weight:900}
-    h1{font-size:19px;margin:0}header p{margin:3px 0 0;color:#9fb0ca;font-size:12px}
-    main{flex:1;display:flex;flex-direction:column;padding:16px;gap:14px}
-    #messages{display:flex;flex-direction:column;gap:12px;flex:1}
-    .bubble{max-width:90%;padding:12px 14px;border-radius:16px;white-space:pre-wrap;line-height:1.45}
-    .bot{align-self:flex-start;background:#172338;border:1px solid #293950}
-    .user{align-self:flex-end;background:#2857d8;color:#fff}
-    .welcome{color:#a9bbd4;font-size:14px}
-    .composer{display:flex;gap:8px;padding:10px;background:#111b2b;border:1px solid #28364c;border-radius:18px}
-    input,textarea{width:100%;background:transparent;color:#fff;border:0;outline:0;font:inherit}
-    button{border:0;background:#4a78ff;color:#fff;border-radius:12px;padding:10px 15px;font-weight:700;cursor:pointer}
-    button:disabled{opacity:.5}
-    .tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-    .secondary{background:#202e43;border:1px solid #34465f}
-    .panel{background:#111b2b;border:1px solid #293a52;border-radius:16px;padding:14px}
-    .panel summary{font-weight:700;cursor:pointer}
-    .teach{display:grid;gap:9px;margin-top:12px}
-    .teach input{background:#0c1422;border:1px solid #2d4059;padding:11px;border-radius:10px}
-    .wordlist{font-size:13px;color:#b5c6dd;margin-top:10px;max-height:180px;overflow:auto}
-    .small{font-size:12px;color:#91a3be;text-align:center}
-    @media(min-width:650px){main{padding:24px}.bubble{max-width:75%}}
-  </style>
-</head>
-<body>
-  <div class="app">
-    <header><div class="logo">C</div><div><h1>Calix AI</h1><p>Ekegusii community-learning assistant · early build</p></div></header>
-    <main>
-      <div id="messages" aria-live="polite">
-        <div class="bubble bot">Hello! I’m Calix AI. I’m starting to build my Ekegusii knowledge with the community. You can chat with me or teach me a word below.</div>
-      </div>
-      <div class="composer"><input id="chatInput" autocomplete="off" placeholder="Ask Calix AI or try an Ekegusii word…" aria-label="Chat message"><button id="sendBtn">Send</button></div>
-      <div class="tools"><button class="secondary" id="teachToggle">Teach Calix a word</button><button class="secondary" id="wordsToggle">View saved words</button></div>
-      <section class="panel" id="teachPanel" hidden>
-        <strong>Teach Calix AI</strong>
-        <div class="teach"><input id="word" placeholder="Ekegusii word or phrase"><input id="meaning" placeholder="Meaning in English"><input id="example" placeholder="Example sentence (optional)"><button id="saveWord">Save word</button></div>
-        <p class="small">Words are saved on this device for now, not shared with other users yet.</p>
-      </section>
-      <section class="panel" id="wordsPanel" hidden><strong>Words saved on this device</strong><div class="wordlist" id="wordList">No words yet.</div></section>
-      <p class="small">Early prototype: vocabulary storage works locally. Live AI and shared cloud learning will be connected next.</p>
-    </main>
-  </div>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101827"><title>Calix AI</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1220;color:#edf3ff;font:16px system-ui,-apple-system,Segoe UI,sans-serif}.app{min-height:100dvh;max-width:900px;margin:auto;display:flex;flex-direction:column}header{display:flex;gap:12px;align-items:center;padding:16px;border-bottom:1px solid #263349}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#43d9ff,#5c75ff);display:grid;place-items:center;color:#061321;font-weight:900;font-size:20px}h1{font-size:19px;margin:0}header p{font-size:12px;color:#9fb0ca;margin:2px 0}main{padding:14px;display:flex;flex-direction:column;gap:12px;flex:1}.status{border:1px solid #293950;background:#121d2f;padding:9px 12px;border-radius:12px;font-size:12px;color:#a9bbd4}#messages{display:flex;flex-direction:column;gap:10px;flex:1;min-height:45vh}.bubble{max-width:92%;padding:12px 14px;border-radius:16px;white-space:pre-wrap;line-height:1.45;overflow-wrap:anywhere}.bot{align-self:flex-start;background:#172338;border:1px solid #293950}.user{align-self:flex-end;background:#2857d8;color:white}.composer{display:flex;gap:8px;padding:9px;background:#111b2b;border:1px solid #28364c;border-radius:16px}input{width:100%;background:transparent;color:#fff;border:0;outline:0;font:inherit;min-width:0}button{border:0;background:#4a78ff;color:#fff;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}button:disabled{opacity:.6}.tools{display:flex;gap:8px;flex-wrap:wrap}.secondary{background:#202e43;border:1px solid #34465f}.panel{background:#111b2b;border:1px solid #293a52;border-radius:15px;padding:13px}.panel[hidden]{display:none}.teach{display:grid;gap:9px;margin-top:10px}.teach input{background:#0c1422;border:1px solid #2d4059;padding:11px;border-radius:10px}.words{font-size:13px;color:#b5c6dd;margin-top:10px;max-height:240px;overflow:auto}.small{font-size:12px;color:#91a3be;text-align:center;margin:0}.word{border-bottom:1px solid #27364c;padding:8px 0}.word:last-child{border:0}.word b{color:#edf3ff}@media(min-width:650px){main{padding:22px}.bubble{max-width:78%}}
+</style></head><body><div class="app">
+<header><div class="logo">C</div><div><h1>Calix AI</h1><p>Ekegusii community-learning assistant</p></div></header>
+<main><div class="status" id="status">Checking AI and community database…</div>
+<div id="messages" aria-live="polite"><div class="bubble bot">Hello! I’m Calix AI. Ask me a question, or help grow my Ekegusii knowledge by teaching me a word or phrase.</div></div>
+<div class="composer"><input id="chatInput" autocomplete="off" placeholder="Message Calix AI…" aria-label="Chat message"><button id="sendBtn">Send</button></div>
+<div class="tools"><button class="secondary" id="teachToggle">Teach a word</button><button class="secondary" id="wordsToggle">Browse dictionary</button></div>
+<section class="panel" id="teachPanel" hidden><strong>Teach Calix a word</strong><div class="teach"><input id="word" placeholder="Ekegusii word or phrase"><input id="meaning" placeholder="Meaning or translation"><input id="example" placeholder="Example sentence (optional)"><input id="notes" placeholder="Dialect/context note (optional)"><button id="saveWord">Submit contribution</button></div><p class="small" style="margin-top:9px">Community contributions will be marked pending until reviewed. If the cloud database is not connected, Calix will save it on this device.</p></section>
+<section class="panel" id="wordsPanel" hidden><strong>Community dictionary</strong><div id="wordList" class="words">Loading dictionary…</div></section>
+<p class="small">Calix AI grows from community knowledge. Unverified translations are not presented as confirmed.</p></main></div>
 <script>
-const KEY='calix_vocab_v1';
-const getWords=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return []}};
-const putWords=w=>localStorage.setItem(KEY,JSON.stringify(w));
-const msgs=document.getElementById('messages'), input=document.getElementById('chatInput');
-function add(text,who='bot'){const b=document.createElement('div');b.className='bubble '+who;b.textContent=text;msgs.appendChild(b);b.scrollIntoView({behavior:'smooth',block:'end'})}
-function answer(q){const words=getWords(),query=q.toLowerCase().trim();const matches=words.filter(w=>query.includes(w.word.toLowerCase())||w.word.toLowerCase().includes(query));if(matches.length){return matches.map(w=>'Ekegusii: '+w.word+'\nMeaning: '+w.meaning+(w.example?'\nExample: '+w.example:'')).join('\n\n')}
-if(/teach|learn|word|ekegusii/i.test(q))return 'I can learn new words in this early build. Tap “Teach Calix a word” and enter the word, meaning, and optional example. Words are saved on this device.';
-return 'I’m still being connected to a live AI model. I can look up Ekegusii words that have been saved on this device. Try teaching me a word using “Teach Calix a word”.';}
-function send(){const q=input.value.trim();if(!q)return;add(q,'user');input.value='';setTimeout(()=>add(answer(q)),150)}
-document.getElementById('sendBtn').onclick=send;input.addEventListener('keydown',e=>{if(e.key==='Enter')send()});
-document.getElementById('teachToggle').onclick=()=>{document.getElementById('teachPanel').hidden=!document.getElementById('teachPanel').hidden};
-document.getElementById('wordsToggle').onclick=()=>{const p=document.getElementById('wordsPanel');p.hidden=!p.hidden;renderWords()};
-document.getElementById('saveWord').onclick=()=>{const word=document.getElementById('word').value.trim(),meaning=document.getElementById('meaning').value.trim(),example=document.getElementById('example').value.trim();if(!word||!meaning){alert('Please enter the word and its meaning.');return}const words=getWords();const existing=words.findIndex(w=>w.word.toLowerCase()===word.toLowerCase());const item={word,meaning,example,updatedAt:new Date().toISOString()};if(existing>=0)words[existing]=item;else words.unshift(item);putWords(words);document.getElementById('word').value='';document.getElementById('meaning').value='';document.getElementById('example').value='';renderWords();add('Thank you! I saved “'+word+'” on this device. It is not yet shared to the community cloud.','bot')};
-function renderWords(){const words=getWords();document.getElementById('wordList').innerHTML=words.length?words.map(w=>'<p><b>'+escapeHtml(w.word)+'</b> — '+escapeHtml(w.meaning)+(w.example?' <i>Example:</i> '+escapeHtml(w.example):'')+'</p>').join(''):'No words yet.'}
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-</script>
-</body>
-</html>
+const API="https://calix-ai-api.onrender.com/api", LOCAL="calix_vocab_v1";
+const localWords=()=>{try{return JSON.parse(localStorage.getItem(LOCAL)||"[]")}catch{return []}};
+const saveLocal=w=>localStorage.setItem(LOCAL,JSON.stringify(w));
+const $=id=>document.getElementById(id),msgs=$("messages"),input=$("chatInput");
+let cloudReady=false,aiReady=false,communityWords=[];
+function bubble(t,who="bot"){let el=document.createElement("div");el.className="bubble "+who;el.textContent=t;msgs.appendChild(el);el.scrollIntoView({behavior:"smooth",block:"end"});}
+function escapeText(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function checkStatus(){try{let r=await fetch(API+"/health");let d=await r.json();cloudReady=d.databaseConfigured;aiReady=d.aiConfigured;$("status").textContent=(aiReady?"AI connected":"AI setup pending")+" · "+(cloudReady?"Community database connected":"Shared dictionary setup pending");}catch{$("status").textContent="API waking up or unavailable · Local dictionary mode remains available";}}
+async function loadWords(q=""){try{let u=API+"/words"+(q?"?q="+encodeURIComponent(q):"");let r=await fetch(u);if(!r.ok)throw Error();let d=await r.json();communityWords=d.words||[];return communityWords}catch{return []}}
+function findLocal(q){let query=q.toLowerCase();return localWords().filter(w=>query.includes(w.word.toLowerCase())||w.word.toLowerCase().includes(query));}
+function localAnswer(q){let found=findLocal(q);if(found.length)return found.map(w=>w.word+" — "+w.meaning+(w.example?"\nExample: "+w.example:"")).join("\n\n");return "My live AI connection is not ready yet. I can already keep vocabulary you teach me on this device. Shared learning and real AI replies will work after the cloud services are configured.";}
+async function send(){let q=input.value.trim();if(!q)return;bubble(q,"user");input.value="";$("sendBtn").disabled=true;try{let res=await fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:q})});let data=await res.json();if(!res.ok)throw Error(data.error||"Chat service is not ready");bubble(data.reply||"No response received.");}catch(e){bubble(localAnswer(q)+"\n\n"+(e.message||"Service not ready"));}finally{$("sendBtn").disabled=false;}}
+$("sendBtn").onclick=send;input.addEventListener("keydown",e=>{if(e.key==="Enter")send()});
+$("teachToggle").onclick=()=>{$("teachPanel").hidden=!$("teachPanel").hidden};
+$("wordsToggle").onclick=async()=>{let p=$("wordsPanel");p.hidden=!p.hidden;if(!p.hidden){let list=await loadWords();let all=[...list,...localWords()];$("wordList").innerHTML=all.length?all.map(w=>'<div class="word"><b>'+escapeText(w.word)+'</b> — '+escapeText(w.meaning)+(w.example?' <i>Example:</i> '+escapeText(w.example):'')+(w.status==="pending"?' <span>(pending review)</span>':'')+'</div>').join(""):"No approved community words yet. Teach Calix a word to begin.";}}
+$("saveWord").onclick=async()=>{let word=$("word").value.trim(),meaning=$("meaning").value.trim(),example=$("example").value.trim(),notes=$("notes").value.trim();if(!word||!meaning){alert("Enter the word and meaning.");return;}const local=localWords();let found=local.findIndex(x=>x.word.toLowerCase()===word.toLowerCase());let item={word,meaning,example,notes,status:"pending",updatedAt:new Date().toISOString()};if(found>=0)local[found]=item;else local.unshift(item);saveLocal(local);
+try{let r=await fetch(API+"/words",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({word,meaning,example,notes})});let d=await r.json();if(!r.ok)throw Error(d.error||"Cloud submission failed");bubble("Thank you! “"+word+"” was sent to the community database for review.");}catch{bubble("Saved “"+word+"” on this device. Cloud sharing is not connected yet, so this contribution has not reached other users.");}
+$("word").value=$("meaning").value=$("example").value=$("notes").value="";};
+checkStatus();
+</script></body></html>
